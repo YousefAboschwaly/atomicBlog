@@ -1,0 +1,574 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #222;
+  line-height: 1.25;
+  background: #fff;
+  padding: 32px;
+}
+
+/* Animation keyframes */
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.app-loaded {
+  animation: fadeInPage 0.8s ease-out;
+}
+
+.fake-dark-mode {
+  filter: invert(100%);
+  transition: all 0.5s;
+}
+
+.btn-fake-dark-mode {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 16px;
+  line-height: 1;
+  font-size: 26px;
+  background-color: #ffe8cc;
+  border: none;
+  z-index: 999;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-fake-dark-mode:hover {
+  background-color: #ffd8a8;
+  transform: scale(1.1);
+}
+
+.btn-fake-dark-mode:active {
+  transform: scale(0.95);
+}
+
+section {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+header {
+  margin-bottom: 32px;
+  font-weight: bold;
+  justify-content: space-between;
+  display: flex;
+  animation: slideInFromTop 0.6s ease-out;
+}
+
+h1 {
+  font-size: 26px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+h1 span {
+  font-size: 140%;
+  line-height: 1;
+  display: inline-block;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+h2 {
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+h3 {
+  text-transform: capitalize;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+header div {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+header button {
+  font-size: 14px;
+}
+
+form {
+  padding: 24px;
+  background-color: #fff4e6;
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+form:focus-within {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+main {
+  margin-bottom: 40px;
+}
+
+aside {
+  margin-bottom: 40px;
+  opacity: 75%;
+  animation: fadeIn 1s ease-out;
+}
+
+input,
+textarea,
+button {
+  font-size: 16px;
+  padding: 8px 12px;
+  border: 1px solid #ffe8cc;
+  font-family: inherit;
+  color: inherit;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+input {
+  width: 12rem;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid #ffa94d;
+  border-radius: 4px;
+  transform: scale(1.01);
+}
+
+*::placeholder {
+  color: #999;
+}
+
+*:focus {
+  outline: 2px solid #ffa94d;
+  border-radius: 2px;
+}
+
+textarea {
+  flex: 1;
+  height: 50px;
+  resize: vertical;
+}
+
+button {
+  border: 1px solid #ffa94d;
+  background-color: #ffa94d;
+  font-weight: 700;
+  padding: 9px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  background-color: #ff922b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add this for the button ripple effect */
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.8s;
+}
+
+button:active:after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+main ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+main li {
+  border: 1px solid #ffe8cc;
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+  background-color: #fff;
+}
+
+main li:hover {
+  background-color: #fff4e6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fixed archive section */
+aside ul {
+  font-size: 90%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease-in-out;
+}
+
+aside ul.show {
+  max-height: 5000px; /* Increased max-height to ensure all content is visible */
+  overflow-y: visible; /* Ensure content is visible */
+}
+
+aside li {
+  border: 1px solid #ffe8cc;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Changed from center to flex-start for better alignment */
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  margin-bottom: 8px; /* Added margin to ensure separation */
+}
+
+aside li p {
+  margin-right: 10px;
+  flex: 1;
+}
+
+aside li:hover {
+  background-color: #fff4e6;
+}
+
+h2 + button {
+  margin-bottom: 24px;
+}
+
+aside li button {
+  padding: 8px 12px;
+  font-size: 14px;
+  white-space: nowrap;
+  min-width: 140px; /* Added min-width for consistent button size */
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  color: #666;
+  animation: fadeIn 1.2s ease-out;
+}
+
+/* Improved Responsive Design */
+@media screen and (min-width: 1024px) {
+  main ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  main ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  header div {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  body {
+    padding: 16px;
+  }
+}
+
+/* Improved styles for 600px */
+@media screen and (max-width: 600px) {
+  header h1 {
+    font-size: 35px;
+  }
+
+  input {
+    width: 100%;
+  }
+  main ul {
+    grid-template-columns: 1fr;
+  }
+  form {
+    flex-direction: column;
+  }
+
+  /* Fixed archive section for 600px */
+  aside li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  aside li p {
+    margin-bottom: 10px;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  aside li button {
+    width: 100%;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* Ensure archive is visible */
+  aside ul.show {
+    max-height: 10000px;
+    overflow-y: visible;
+  }
+}
+
+/* Improved styles for 500px */
+@media screen and (max-width: 500px) {
+  form {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  body {
+    padding: 12px;
+  }
+
+  .btn-fake-dark-mode {
+    padding: 12px;
+    font-size: 22px;
+  }
+
+  /* Fixed archive section for 500px */
+  aside li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+
+  aside li p {
+    margin-bottom: 12px;
+    margin-right: 0;
+    width: 100%;
+    word-break: break-word; /* Prevent text overflow */
+  }
+
+  aside li button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+  }
+
+  /* Ensure archive is visible */
+  aside ul.show {
+    max-height: 10000px;
+    overflow-y: visible;
+  }
+
+  /* Increase spacing between archive items */
+  aside ul {
+    gap: 12px;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add animation delays for staggered effects */
+main li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+main li:nth-child(2) {
+  animation-delay: 0.2s;
+}
+main li:nth-child(3) {
+  animation-delay: 0.3s;
+}
+main li:nth-child(4) {
+  animation-delay: 0.4s;
+}
+main li:nth-child(5) {
+  animation-delay: 0.5s;
+}
+main li:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Loading animation */
+.loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffa94d;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form submission animation */
+form button:disabled {
+  background-color: #ffc078;
+  cursor: not-allowed;
+}
