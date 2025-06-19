@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { memo, useEffect, useState } from "react"
 import { createRandomPost, PostProvider, usePost } from "./PostContext"
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
       <PostProvider>
         <Header />
         <Main />
-        <Archive />
+        <Archive show={false} />
         <Footer />
       </PostProvider>
     </section>
@@ -124,15 +124,15 @@ function List() {
   )
 }
 
-function Archive() {
+const Archive= memo( function Archive({show}) {
   // Using state to store these posts as an optimization technique
   const [posts] = useState(() =>
     // Creating 10 posts instead of 100 to avoid performance issues but still demonstrate functionality
-    Array.from({ length: 50 }, (_, i) => (createRandomPost())),
+    Array.from({ length: 100 }, () => (createRandomPost())),
   )
 
   const { onAddPost } = usePost()
-  const [showArchive, setShowArchive] = useState(false)
+  const [showArchive, setShowArchive] = useState(show)
 
   return (
     <aside>
@@ -153,7 +153,7 @@ function Archive() {
       </ul>
     </aside>
   )
-}
+})
 
 function Footer() {
   return <footer>&copy; by The Atomic Blog ✌️</footer>
