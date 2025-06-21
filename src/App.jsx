@@ -128,7 +128,7 @@ const Archive= memo( function Archive({show}) {
   // Using state to store these posts as an optimization technique
   const [posts] = useState(() =>
     // Creating 10 posts instead of 100 to avoid performance issues but still demonstrate functionality
-    Array.from({ length: 100 }, () => (createRandomPost())),
+    Array.from({ length: 1000 }, () => (createRandomPost())),
   )
 
   const { onAddPost } = usePost()
